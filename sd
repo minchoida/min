@@ -1,0 +1,1917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lenme Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ============================================================
+   LENME DESIGN SYSTEM — TOKENS
+   ============================================================ */
+
+:root {
+
+  /* --- BRAND COLORS --- */
+  --lenme-navy:       #0B1F3A;
+  --lenme-navy-80:    #223350;
+  --lenme-navy-60:    #3A4F6B;
+  --lenme-navy-20:    #C8D2DE;
+  --lenme-navy-10:    #E9EDF2;
+  --lenme-navy-05:    #F4F6F9;
+
+  --lenme-teal:       #00C896;
+  --lenme-teal-80:    #33D3AB;
+  --lenme-teal-40:    #99E9D5;
+  --lenme-teal-15:    #D6F7EF;
+  --lenme-teal-08:    #EDFCF8;
+
+  --lenme-white:      #FFFFFF;
+  --lenme-surface:    #F7F9FB;
+  --lenme-surface2:   #EFF2F6;
+
+  /* --- SEMANTIC / RISK COLORS --- */
+  --risk-low:         #00C896;   /* green — safe */
+  --risk-low-bg:      #EDFCF8;
+  --risk-low-text:    #006B50;
+
+  --risk-med:         #F5A623;   /* amber — moderate */
+  --risk-med-bg:      #FEF6E7;
+  --risk-med-text:    #7A4E00;
+
+  --risk-high:        #E5383B;   /* red — high risk */
+  --risk-high-bg:     #FDECEA;
+  --risk-high-text:   #8B0000;
+
+  --status-pending:   #6C8EBF;
+  --status-pending-bg:#EEF3FA;
+
+  --status-active:    #00C896;
+  --status-active-bg: #EDFCF8;
+
+  --status-completed: #6B7280;
+  --status-completed-bg: #F3F4F6;
+
+  --status-default:   #E5383B;
+  --status-default-bg:#FDECEA;
+
+  /* --- TYPOGRAPHY --- */
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'IBM Plex Sans', sans-serif;
+  --font-mono:    'IBM Plex Mono', monospace;
+
+  --text-xs:   0.6875rem;  /* 11px */
+  --text-sm:   0.8125rem;  /* 13px */
+  --text-base: 0.9375rem;  /* 15px */
+  --text-md:   1.0625rem;  /* 17px */
+  --text-lg:   1.25rem;    /* 20px */
+  --text-xl:   1.5rem;     /* 24px */
+  --text-2xl:  2rem;       /* 32px */
+  --text-3xl:  2.75rem;    /* 44px */
+
+  /* --- SPACING (4pt base) --- */
+  --space-1:  0.25rem;   /* 4px */
+  --space-2:  0.5rem;    /* 8px */
+  --space-3:  0.75rem;   /* 12px */
+  --space-4:  1rem;      /* 16px */
+  --space-5:  1.25rem;   /* 20px */
+  --space-6:  1.5rem;    /* 24px */
+  --space-8:  2rem;      /* 32px */
+  --space-10: 2.5rem;    /* 40px */
+  --space-12: 3rem;      /* 48px */
+  --space-16: 4rem;      /* 64px */
+
+  /* --- RADIUS --- */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-2xl:  24px;
+  --radius-full: 9999px;
+
+  /* --- ELEVATION (shadows) --- */
+  --shadow-sm:  0 1px 3px rgba(11,31,58,0.08);
+  --shadow-md:  0 4px 12px rgba(11,31,58,0.10);
+  --shadow-lg:  0 8px 24px rgba(11,31,58,0.12);
+
+  /* --- BORDERS --- */
+  --border-light:  1px solid rgba(11,31,58,0.08);
+  --border-mid:    1px solid rgba(11,31,58,0.14);
+  --border-strong: 1px solid rgba(11,31,58,0.24);
+}
+
+/* ============================================================
+   PAGE SHELL
+   ============================================================ */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: #0F0F12;
+  color: #E8EAF0;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   DOC LAYOUT
+   ============================================================ */
+
+.doc-wrap {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: 220px;
+  background: #17171C;
+  border-right: 1px solid rgba(255,255,255,0.06);
+  padding: 2rem 0;
+  overflow-y: auto;
+  z-index: 50;
+}
+.sidebar-logo {
+  padding: 0 1.5rem 2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 1.5rem;
+}
+.sidebar-logo-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+.sidebar-logo-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--lenme-teal);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+.nav-group { margin-bottom: 1.5rem; padding: 0 1.5rem; }
+.nav-group-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 0.5rem;
+}
+.nav-link {
+  display: block;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  padding: 0.35rem 0;
+  transition: color 0.15s;
+}
+.nav-link:hover { color: rgba(255,255,255,0.9); }
+.nav-link.active { color: var(--lenme-teal); }
+
+/* MAIN */
+.main {
+  margin-left: 220px;
+  padding: 3rem 4rem;
+  max-width: 1100px;
+}
+
+/* ============================================================
+   SECTION HEADERS
+   ============================================================ */
+
+.section { margin-bottom: 5rem; }
+.section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--lenme-teal);
+  margin-bottom: 0.75rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.section-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 16px; height: 1px;
+  background: var(--lenme-teal);
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+.section-desc {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 2.5rem;
+  max-width: 560px;
+  line-height: 1.7;
+}
+
+hr.divider {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  margin: 3rem 0;
+}
+
+/* ============================================================
+   TOKEN LABEL
+   ============================================================ */
+
+.token-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.3);
+  display: block;
+  margin-top: 0.35rem;
+}
+.token-value {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.5);
+}
+
+/* ============================================================
+   COLOR SWATCHES
+   ============================================================ */
+
+.swatch-group { margin-bottom: 2rem; }
+.swatch-group-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: var(--font-mono);
+}
+.swatch-row {
+  display: flex;
+  gap: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  height: 60px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.swatch {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  padding: 0.3rem 0.4rem;
+  cursor: default;
+  position: relative;
+  transition: flex 0.2s ease;
+}
+.swatch:hover { flex: 2; }
+.swatch-hex {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  opacity: 0;
+  transition: opacity 0.15s;
+  white-space: nowrap;
+}
+.swatch:hover .swatch-hex { opacity: 1; }
+
+.swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 1rem;
+}
+.swatch-card {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.swatch-color {
+  height: 64px;
+}
+.swatch-info {
+  background: #1E1E24;
+  padding: 0.6rem 0.75rem;
+}
+.swatch-name {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.8);
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* ============================================================
+   SEMANTIC COLOR PILLS
+   ============================================================ */
+
+.semantic-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.semantic-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.semantic-top {
+  height: 80px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500;
+}
+.semantic-bottom {
+  background: #1E1E24;
+  padding: 0.75rem;
+}
+.semantic-bottom .swatch-name { color: rgba(255,255,255,0.7); }
+
+/* ============================================================
+   TYPOGRAPHY SPECIMENS
+   ============================================================ */
+
+.type-specimen {
+  background: #17171C;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 2rem;
+  margin-bottom: 1rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 1rem;
+}
+.type-meta {
+  text-align: right;
+}
+.type-meta .token-label { text-align: right; }
+.type-scale-display {
+  background: #17171C;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+.type-scale-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.type-scale-row:last-child { border-bottom: none; }
+.type-scale-meta {
+  min-width: 180px;
+  flex-shrink: 0;
+}
+.type-scale-meta .token-label { margin-top: 0; }
+.type-sample { color: rgba(255,255,255,0.85); }
+.type-sample.dimmed { color: rgba(255,255,255,0.4); }
+
+/* ============================================================
+   SPACING DISPLAY
+   ============================================================ */
+
+.spacing-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: #17171C;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+}
+.spacing-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.spacing-bar-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.spacing-bar {
+  height: 24px;
+  background: linear-gradient(90deg, var(--lenme-teal) 0%, rgba(0,200,150,0.3) 100%);
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.spacing-meta {
+  min-width: 80px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.4);
+}
+.spacing-token {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--lenme-teal);
+  min-width: 80px;
+}
+.spacing-px {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.3);
+  min-width: 36px;
+}
+
+/* ============================================================
+   RADIUS DISPLAY
+   ============================================================ */
+
+.radius-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0,1fr));
+  gap: 1rem;
+}
+.radius-card {
+  background: #17171C;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  text-align: center;
+}
+.radius-box {
+  width: 48px; height: 48px;
+  background: rgba(0,200,150,0.15);
+  border: 1.5px solid var(--lenme-teal);
+  margin: 0 auto 0.75rem;
+}
+
+/* ============================================================
+   COMPONENT PREVIEW AREA
+   ============================================================ */
+
+.preview-surface {
+  background: var(--lenme-surface);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(11,31,58,0.1);
+}
+.component-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 0.75rem;
+  margin-top: 1.5rem;
+}
+.component-label:first-child { margin-top: 0; }
+
+/* ============================================================
+   LENME COMPONENTS (light surface rendering)
+   ============================================================ */
+
+/* --- BUTTONS --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  text-decoration: none;
+  line-height: 1;
+}
+.btn:focus-visible {
+  outline: 2px solid var(--lenme-teal);
+  outline-offset: 2px;
+}
+
+/* Sizes */
+.btn-sm  { font-size: 0.75rem; padding: 0.45rem 0.9rem; border-radius: var(--radius-sm); }
+.btn-md  { font-size: 0.875rem; padding: 0.625rem 1.25rem; border-radius: var(--radius-md); }
+.btn-lg  { font-size: 0.9375rem; padding: 0.875rem 1.75rem; border-radius: var(--radius-md); }
+.btn-xl  { font-size: 1rem; padding: 1rem 2rem; border-radius: var(--radius-lg); letter-spacing: 0.01em; }
+
+/* Variants */
+.btn-primary {
+  background: var(--lenme-navy);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(11,31,58,0.25);
+}
+.btn-primary:hover { background: var(--lenme-navy-80); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(11,31,58,0.3); }
+.btn-primary:active { transform: translateY(0); }
+
+.btn-teal {
+  background: var(--lenme-teal);
+  color: var(--lenme-navy);
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,200,150,0.3);
+}
+.btn-teal:hover { background: var(--lenme-teal-80); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,200,150,0.35); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--lenme-navy);
+  border: 1.5px solid var(--lenme-navy-20);
+}
+.btn-outline:hover { border-color: var(--lenme-navy); background: var(--lenme-navy-05); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--lenme-navy-60);
+}
+.btn-ghost:hover { background: var(--lenme-navy-10); color: var(--lenme-navy); }
+
+.btn-danger {
+  background: var(--risk-high);
+  color: #fff;
+}
+.btn-danger:hover { background: #c62b2e; transform: translateY(-1px); }
+
+.btn-icon {
+  width: 36px; height: 36px;
+  padding: 0;
+  border-radius: var(--radius-md);
+  background: var(--lenme-navy-10);
+  color: var(--lenme-navy-60);
+  font-size: 0.9rem;
+}
+.btn-icon:hover { background: var(--lenme-navy-20); color: var(--lenme-navy); }
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* --- STATUS BADGES --- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+}
+.badge::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.badge-pending   { background: var(--status-pending-bg);   color: var(--status-pending);   }
+.badge-pending::before { background: var(--status-pending); }
+.badge-active    { background: var(--status-active-bg);    color: var(--risk-low-text);    }
+.badge-active::before { background: var(--status-active); }
+.badge-completed { background: var(--status-completed-bg); color: var(--status-completed); }
+.badge-completed::before { background: var(--status-completed); }
+.badge-default   { background: var(--status-default-bg);   color: var(--risk-high-text);   }
+.badge-default::before { background: var(--status-default); }
+
+/* --- RISK BADGES --- */
+.risk-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+}
+.risk-low  { background: var(--risk-low-bg);  color: var(--risk-low-text);  }
+.risk-med  { background: var(--risk-med-bg);  color: var(--risk-med-text);  }
+.risk-high { background: var(--risk-high-bg); color: var(--risk-high-text); }
+
+/* --- LENME SCORE INDICATOR --- */
+.score-indicator {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+.score-ring {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  border: 3px solid;
+}
+.score-ring.low  { border-color: var(--risk-low);  color: var(--risk-low-text);  background: var(--risk-low-bg); }
+.score-ring.med  { border-color: var(--risk-med);  color: var(--risk-med-text);  background: var(--risk-med-bg); }
+.score-ring.high { border-color: var(--risk-high); color: var(--risk-high-text); background: var(--risk-high-bg); }
+.score-label {
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.score-label.low  { color: var(--risk-low-text);  }
+.score-label.med  { color: var(--risk-med-text);  }
+.score-label.high { color: var(--risk-high-text); }
+
+/* --- AVATAR (borrower color coding) --- */
+.avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.avatar-green  { background: var(--risk-low-bg);  color: var(--risk-low-text);  }
+.avatar-yellow { background: var(--risk-med-bg);  color: var(--risk-med-text);  }
+.avatar-red    { background: var(--risk-high-bg); color: var(--risk-high-text); }
+
+/* --- INPUT --- */
+.input-wrap { position: relative; width: 100%; }
+.input {
+  width: 100%;
+  background: #fff;
+  border: 1.5px solid var(--lenme-navy-20);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--lenme-navy);
+  padding: 0.625rem 1rem;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  outline: none;
+}
+.input:focus { border-color: var(--lenme-teal); box-shadow: 0 0 0 3px rgba(0,200,150,0.15); }
+.input-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--lenme-navy-60);
+  margin-bottom: 0.35rem;
+  display: block;
+}
+.input-hint {
+  font-size: 0.7rem;
+  color: #6B7280;
+  margin-top: 0.3rem;
+}
+.input-group { margin-bottom: 1rem; }
+
+/* --- SLIDER --- */
+.slider-wrap { display: flex; align-items: center; gap: 0.75rem; }
+input[type=range].lenme-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: 1;
+  height: 4px;
+  background: var(--lenme-navy-20);
+  border-radius: var(--radius-full);
+  outline: none;
+  cursor: pointer;
+}
+input[type=range].lenme-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--lenme-navy);
+  border: 3px solid #fff;
+  box-shadow: 0 2px 6px rgba(11,31,58,0.25);
+  cursor: pointer;
+}
+input[type=range].lenme-slider::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: var(--radius-full);
+}
+.slider-value {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--lenme-navy);
+  min-width: 48px;
+  text-align: right;
+}
+
+/* --- LOAN CARD --- */
+.loan-card {
+  background: #fff;
+  border: 1px solid rgba(11,31,58,0.08);
+  border-radius: var(--radius-xl);
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.loan-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.loan-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.loan-card-name { font-size: 0.88rem; font-weight: 500; color: var(--lenme-navy); }
+.loan-card-purpose { font-size: 0.75rem; color: #6B7280; }
+.loan-card-scores {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.loan-card-score {
+  flex: 1;
+  background: var(--lenme-surface);
+  border-radius: var(--radius-md);
+  padding: 0.5rem;
+  text-align: center;
+}
+.loan-card-score-val {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--lenme-navy);
+  display: block;
+}
+.loan-card-score-label {
+  font-size: 0.62rem;
+  color: #6B7280;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-family: var(--font-mono);
+}
+.loan-card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.loan-card-amount {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--lenme-navy);
+}
+.loan-card-duration {
+  font-size: 0.75rem;
+  color: #6B7280;
+  margin-top: 1px;
+}
+
+/* --- OFFER CARD (pending) --- */
+.offer-card {
+  background: #fff;
+  border: 1px solid rgba(11,31,58,0.08);
+  border-radius: var(--radius-xl);
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+.offer-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+.offer-card-amount {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--lenme-navy);
+}
+.offer-card-rate {
+  font-size: 0.75rem;
+  color: #6B7280;
+  margin-top: 2px;
+}
+.offer-card-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--lenme-navy-10);
+  margin-top: 0.75rem;
+}
+.offer-card-seen {
+  font-size: 0.72rem;
+  color: var(--risk-low-text);
+  display: flex; align-items: center; gap: 0.3rem;
+}
+.offer-card-actions { display: flex; gap: 0.5rem; }
+.offer-card-timestamp { font-size: 0.68rem; color: #9CA3AF; font-family: var(--font-mono); }
+
+/* --- PROGRESS BAR --- */
+.progress-wrap { margin-bottom: 0.3rem; }
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: #6B7280;
+  margin-bottom: 0.35rem;
+}
+.progress-track {
+  height: 6px;
+  background: var(--lenme-navy-10);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: linear-gradient(90deg, var(--lenme-teal) 0%, #00a87d 100%);
+  transition: width 0.5s ease;
+}
+.progress-fill.warning { background: linear-gradient(90deg, var(--risk-med) 0%, #d4890f 100%); }
+.progress-fill.danger  { background: linear-gradient(90deg, var(--risk-high) 0%, #c22b2e 100%); }
+
+/* --- STAT CARD --- */
+.stat-card {
+  background: #fff;
+  border: 1px solid rgba(11,31,58,0.08);
+  border-radius: var(--radius-xl);
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+.stat-card-label {
+  font-size: 0.72rem;
+  color: #6B7280;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: var(--font-mono);
+  margin-bottom: 0.5rem;
+}
+.stat-card-value {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--lenme-navy);
+  line-height: 1;
+  margin-bottom: 0.35rem;
+}
+.stat-card-delta {
+  font-size: 0.72rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-full);
+}
+.stat-card-delta.up   { background: var(--risk-low-bg);  color: var(--risk-low-text);  }
+.stat-card-delta.down { background: var(--risk-high-bg); color: var(--risk-high-text); }
+
+/* --- REPAYMENT SCHEDULE ROW --- */
+.repay-row {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--lenme-navy-10);
+  gap: 1rem;
+}
+.repay-row:last-child { border-bottom: none; }
+.repay-month {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #6B7280;
+  min-width: 60px;
+}
+.repay-amount {
+  flex: 1;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--lenme-navy);
+}
+.repay-status {}
+
+/* ============================================================
+   COMPONENT GRID UTIL
+   ============================================================ */
+
+.flex-row { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+.grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 1rem; }
+
+/* ============================================================
+   CODE BLOCK
+   ============================================================ */
+
+.code-block {
+  background: #0A0A0D;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.6);
+  overflow-x: auto;
+  margin-top: 0.75rem;
+}
+.code-block .k { color: #00C896; }
+.code-block .v { color: #7FB3FF; }
+.code-block .c { color: rgba(255,255,255,0.25); }
+
+/* ============================================================
+   FIGMA GUIDANCE CARD
+   ============================================================ */
+
+.figma-card {
+  background: #17171C;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  margin-top: 1.5rem;
+}
+.figma-card-title {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 0.5rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.figma-tag {
+  background: #1A1535;
+  color: #9B8AFF;
+  font-size: 0.6rem;
+  font-family: var(--font-mono);
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  letter-spacing: 0.06em;
+}
+.figma-card ul {
+  list-style: none;
+  padding: 0;
+}
+.figma-card ul li {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.4);
+  padding: 0.25rem 0;
+  padding-left: 1rem;
+  position: relative;
+}
+.figma-card ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: rgba(255,255,255,0.2);
+}
+
+</style>
+</head>
+<body>
+
+<div class="doc-wrap">
+
+<!-- ============================================================
+     SIDEBAR NAV
+     ============================================================ -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-name">Lenme</div>
+    <div class="sidebar-logo-tag">Design System v1.0</div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">Foundation</div>
+    <a href="#colors" class="nav-link active">Color</a>
+    <a href="#typography" class="nav-link">Typography</a>
+    <a href="#spacing" class="nav-link">Spacing & Grid</a>
+    <a href="#radius" class="nav-link">Border Radius</a>
+    <a href="#elevation" class="nav-link">Elevation</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">Components</div>
+    <a href="#buttons" class="nav-link">Buttons</a>
+    <a href="#badges" class="nav-link">Badges & Status</a>
+    <a href="#score" class="nav-link">Score Indicator</a>
+    <a href="#inputs" class="nav-link">Inputs & Slider</a>
+    <a href="#cards" class="nav-link">Cards</a>
+    <a href="#data" class="nav-link">Data Display</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">Reference</div>
+    <a href="#tokens" class="nav-link">Token Reference</a>
+    <a href="#figma" class="nav-link">Figma Guide</a>
+  </div>
+</nav>
+
+<!-- ============================================================
+     MAIN CONTENT
+     ============================================================ -->
+<main class="main">
+
+  <!-- HEADER -->
+  <div style="margin-bottom: 4rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.06);">
+    <div style="font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--lenme-teal); margin-bottom: 1rem;">Lenme · Design System</div>
+    <h1 style="font-family: var(--font-display); font-size: 3rem; font-weight: 700; color: #fff; letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 1rem;">Foundation &<br>Components</h1>
+    <p style="font-size: 0.95rem; color: rgba(255,255,255,0.45); max-width: 520px; line-height: 1.75;">
+      Single source of truth for Lenme's visual language. Built for the investor + borrower mobile experience. 
+      Covers colors, type, spacing, and domain-specific components.
+    </p>
+    <div style="display: flex; gap: 0.5rem; margin-top: 1.5rem; flex-wrap: wrap;">
+      <span style="font-family: var(--font-mono); font-size: 0.65rem; background: rgba(0,200,150,0.1); color: var(--lenme-teal); padding: 0.3rem 0.75rem; border-radius: 3px; border: 1px solid rgba(0,200,150,0.2);">v1.0</span>
+      <span style="font-family: var(--font-mono); font-size: 0.65rem; background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.4); padding: 0.3rem 0.75rem; border-radius: 3px; border: 1px solid rgba(255,255,255,0.08);">iOS · React Native</span>
+      <span style="font-family: var(--font-mono); font-size: 0.65rem; background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.4); padding: 0.3rem 0.75rem; border-radius: 3px; border: 1px solid rgba(255,255,255,0.08);">Fintech · P2P Lending</span>
+    </div>
+  </div>
+
+
+  <!-- ===== 1. COLOR ===== -->
+  <section class="section" id="colors">
+    <div class="section-eyebrow">01 · Foundation</div>
+    <h2 class="section-title">Color</h2>
+    <p class="section-desc">Lenme's palette balances trust (navy) with momentum (teal). Semantic colors carry meaning — never use them decoratively.</p>
+
+    <!-- Brand -->
+    <div class="swatch-group">
+      <div class="swatch-group-label">Brand — Navy</div>
+      <div class="swatch-row">
+        <div class="swatch" style="background:#0B1F3A;"><span class="swatch-hex" style="color:rgba(255,255,255,0.6);">#0B1F3A</span></div>
+        <div class="swatch" style="background:#223350;"><span class="swatch-hex" style="color:rgba(255,255,255,0.6);">#223350</span></div>
+        <div class="swatch" style="background:#3A4F6B;"><span class="swatch-hex" style="color:rgba(255,255,255,0.6);">#3A4F6B</span></div>
+        <div class="swatch" style="background:#7B93AD;"><span class="swatch-hex" style="color:rgba(255,255,255,0.6);">#7B93AD</span></div>
+        <div class="swatch" style="background:#C8D2DE;"><span class="swatch-hex" style="color:#0B1F3A;">#C8D2DE</span></div>
+        <div class="swatch" style="background:#E9EDF2;"><span class="swatch-hex" style="color:#0B1F3A;">#E9EDF2</span></div>
+        <div class="swatch" style="background:#F4F6F9;"><span class="swatch-hex" style="color:#0B1F3A;">#F4F6F9</span></div>
+      </div>
+    </div>
+
+    <div class="swatch-group">
+      <div class="swatch-group-label">Brand — Teal (Action / Positive)</div>
+      <div class="swatch-row">
+        <div class="swatch" style="background:#00755A;"><span class="swatch-hex" style="color:rgba(255,255,255,0.7);">#00755A</span></div>
+        <div class="swatch" style="background:#00A87D;"><span class="swatch-hex" style="color:rgba(255,255,255,0.7);">#00A87D</span></div>
+        <div class="swatch" style="background:#00C896;"><span class="swatch-hex" style="color:#003D2E;">#00C896</span></div>
+        <div class="swatch" style="background:#33D3AB;"><span class="swatch-hex" style="color:#003D2E;">#33D3AB</span></div>
+        <div class="swatch" style="background:#99E9D5;"><span class="swatch-hex" style="color:#003D2E;">#99E9D5</span></div>
+        <div class="swatch" style="background:#D6F7EF;"><span class="swatch-hex" style="color:#003D2E;">#D6F7EF</span></div>
+        <div class="swatch" style="background:#EDFCF8;"><span class="swatch-hex" style="color:#003D2E;">#EDFCF8</span></div>
+      </div>
+    </div>
+
+    <!-- Semantic -->
+    <div class="swatch-group-label" style="font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 0.75rem;">Semantic — Risk & Status</div>
+    <div class="semantic-grid">
+      <div class="semantic-card">
+        <div class="semantic-top" style="background: var(--risk-low-bg); color: var(--risk-low-text);">Low Risk</div>
+        <div class="semantic-bottom">
+          <span class="swatch-name">Risk Low</span>
+          <span class="token-label">--risk-low · #00C896</span>
+          <span class="token-label">bg: #EDFCF8</span>
+        </div>
+      </div>
+      <div class="semantic-card">
+        <div class="semantic-top" style="background: var(--risk-med-bg); color: var(--risk-med-text);">Med Risk</div>
+        <div class="semantic-bottom">
+          <span class="swatch-name">Risk Medium</span>
+          <span class="token-label">--risk-med · #F5A623</span>
+          <span class="token-label">bg: #FEF6E7</span>
+        </div>
+      </div>
+      <div class="semantic-card">
+        <div class="semantic-top" style="background: var(--risk-high-bg); color: var(--risk-high-text);">High Risk</div>
+        <div class="semantic-bottom">
+          <span class="swatch-name">Risk High</span>
+          <span class="token-label">--risk-high · #E5383B</span>
+          <span class="token-label">bg: #FDECEA</span>
+        </div>
+      </div>
+      <div class="semantic-card">
+        <div class="semantic-top" style="background: var(--status-pending-bg); color: var(--status-pending);">Pending</div>
+        <div class="semantic-bottom">
+          <span class="swatch-name">Status Pending</span>
+          <span class="token-label">--status-pending · #6C8EBF</span>
+          <span class="token-label">bg: #EEF3FA</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="figma-card">
+      <div class="figma-card-title"><span class="figma-tag">FIGMA</span> Color Variables 설정법</div>
+      <ul>
+        <li>Local variables → Collection: "Lenme Tokens" → Group: "color/brand", "color/risk", "color/status"</li>
+        <li>각 색상 모드(Light / Dark)를 Variable modes로 구분</li>
+        <li>Semantic 색상은 raw hex가 아닌 brand 변수를 참조하게 alias 설정</li>
+        <li>예: risk/low → alias of brand/teal-500</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+
+  <!-- ===== 2. TYPOGRAPHY ===== -->
+  <section class="section" id="typography">
+    <div class="section-eyebrow">01 · Foundation</div>
+    <h2 class="section-title">Typography</h2>
+    <p class="section-desc">세 개의 폰트 역할이 명확히 구분돼요. Display(Syne)는 숫자·헤딩, Body(IBM Plex Sans)는 설명, Mono(IBM Plex Mono)는 코드·레이블·금융 수치.</p>
+
+    <!-- Font families -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 2rem;">
+      <div style="background: #17171C; border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-lg); padding: 1.5rem;">
+        <div style="font-family: var(--font-mono); font-size: 0.62rem; color: var(--lenme-teal); margin-bottom: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;">Display</div>
+        <div style="font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: #fff; line-height: 1.1;">Syne</div>
+        <div style="font-family: var(--font-mono); font-size: 0.65rem; color: rgba(255,255,255,0.3); margin-top: 0.5rem;">Headings · Numbers · Hero</div>
+      </div>
+      <div style="background: #17171C; border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-lg); padding: 1.5rem;">
+        <div style="font-family: var(--font-mono); font-size: 0.62rem; color: var(--lenme-teal); margin-bottom: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;">Body</div>
+        <div style="font-family: var(--font-body); font-size: 1.4rem; font-weight: 400; color: #fff; line-height: 1.2;">IBM Plex Sans</div>
+        <div style="font-family: var(--font-mono); font-size: 0.65rem; color: rgba(255,255,255,0.3); margin-top: 0.5rem;">Body copy · Labels · UI text</div>
+      </div>
+      <div style="background: #17171C; border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-lg); padding: 1.5rem;">
+        <div style="font-family: var(--font-mono); font-size: 0.62rem; color: var(--lenme-teal); margin-bottom: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;">Mono</div>
+        <div style="font-family: var(--font-mono); font-size: 1.1rem; font-weight: 400; color: #fff; line-height: 1.2;">IBM Plex Mono</div>
+        <div style="font-family: var(--font-mono); font-size: 0.65rem; color: rgba(255,255,255,0.3); margin-top: 0.5rem;">Tokens · APR · Amounts · Codes</div>
+      </div>
+    </div>
+
+    <!-- Type scale -->
+    <div class="type-scale-display">
+      <div class="type-scale-row">
+        <div class="type-scale-meta">
+          <span class="token-label">--text-3xl</span>
+          <span class="token-value">44px / 700</span>
+        </div>
+        <div class="type-sample" style="font-family: var(--font-display); font-size: var(--text-3xl); font-weight: 700; color: #fff; line-height: 1.05;">$2,400</div>
+      </div>
+      <div class="type-scale-row">
+        <div class="type-scale-meta">
+          <span class="token-label">--text-2xl</span>
+          <span class="token-value">32px / 700</span>
+        </div>
+        <div class="type-sample" style="font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 700; color: #fff; line-height: 1.1;">Redesigning the offer flow</div>
+      </div>
+      <div class="type-scale-row">
+        <div class="type-scale-meta">
+          <span class="token-label">--text-xl</span>
+          <span class="token-value">24px / 600</span>
+        </div>
+        <div class="type-sample" style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 600; color: rgba(255,255,255,0.9);">Borrower Profile</div>
+      </div>
+      <div class="type-scale-row">
+        <div class="type-scale-meta">
+          <span class="token-label">--text-lg</span>
+          <span class="token-value">20px / 500</span>
+        </div>
+        <div class="type-sample" style="font-family: var(--font-body); font-size: var(--text-lg); font-weight: 500; color: rgba(255,255,255,0.85);">Submit your offer in 3 taps</div>
+      </div>
+      <div class="type-scale-row">
+        <div class="type-scale-meta">
+          <span class="token-label">--text-base</span>
+          <span class="token-value">15px / 400</span>
+        </div>
+        <div class="type-sample" style="font-family: var(--font-body); font-size: var(--text-base); color: rgba(255,255,255,0.7);">Lenme connects borrowers with everyday investors for fast, transparent lending.</div>
+      </div>
+      <div class="type-scale-row">
+        <div class="type-scale-meta">
+          <span class="token-label">--text-sm</span>
+          <span class="token-value">13px / 400</span>
+        </div>
+        <div class="type-sample dimmed" style="font-family: var(--font-body); font-size: var(--text-sm);">Loan funded within 1–2 business days after offer acceptance.</div>
+      </div>
+      <div class="type-scale-row">
+        <div class="type-scale-meta">
+          <span class="token-label">--text-xs (mono)</span>
+          <span class="token-value">11px / 400</span>
+        </div>
+        <div style="font-family: var(--font-mono); font-size: var(--text-xs); color: rgba(255,255,255,0.3); letter-spacing: 0.08em; text-transform: uppercase;">APR · CREDIT SCORE · LENME SCORE</div>
+      </div>
+    </div>
+
+    <div class="figma-card">
+      <div class="figma-card-title"><span class="figma-tag">FIGMA</span> Text Styles 설정법</div>
+      <ul>
+        <li>Text styles: "display/3xl", "display/2xl", "body/lg", "body/base", "body/sm", "mono/xs" 네이밍</li>
+        <li>금융 수치(APR, 금액)는 반드시 IBM Plex Mono — tabular figures로 정렬 맞춤</li>
+        <li>Syne는 Bold(700)과 SemiBold(600)만 사용, 400은 사용하지 않음</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+
+  <!-- ===== 3. SPACING & GRID ===== -->
+  <section class="section" id="spacing">
+    <div class="section-eyebrow">01 · Foundation</div>
+    <h2 class="section-title">Spacing & Grid</h2>
+    <p class="section-desc">4pt 베이스 시스템. 모든 간격은 4의 배수예요. 모바일 앱 기준 레이아웃은 16px 좌우 패딩이 기본.</p>
+
+    <div class="spacing-grid">
+      <div class="spacing-row">
+        <span class="spacing-token">--space-1</span>
+        <div class="spacing-bar-wrap">
+          <div class="spacing-bar" style="width: 4px;"></div>
+          <span class="spacing-px">4px</span>
+        </div>
+        <span class="spacing-meta">아이콘 내부 간격</span>
+      </div>
+      <div class="spacing-row">
+        <span class="spacing-token">--space-2</span>
+        <div class="spacing-bar-wrap">
+          <div class="spacing-bar" style="width: 8px;"></div>
+          <span class="spacing-px">8px</span>
+        </div>
+        <span class="spacing-meta">배지, 태그 내부</span>
+      </div>
+      <div class="spacing-row">
+        <span class="spacing-token">--space-3</span>
+        <div class="spacing-bar-wrap">
+          <div class="spacing-bar" style="width: 12px;"></div>
+          <span class="spacing-px">12px</span>
+        </div>
+        <span class="spacing-meta">인풋 수직 패딩</span>
+      </div>
+      <div class="spacing-row">
+        <span class="spacing-token">--space-4</span>
+        <div class="spacing-bar-wrap">
+          <div class="spacing-bar" style="width: 16px;"></div>
+          <span class="spacing-px">16px</span>
+        </div>
+        <span class="spacing-meta">기본 여백 / 모바일 사이드 패딩</span>
+      </div>
+      <div class="spacing-row">
+        <span class="spacing-token">--space-5</span>
+        <div class="spacing-bar-wrap">
+          <div class="spacing-bar" style="width: 20px;"></div>
+          <span class="spacing-px">20px</span>
+        </div>
+        <span class="spacing-meta">카드 내부 수직</span>
+      </div>
+      <div class="spacing-row">
+        <span class="spacing-token">--space-6</span>
+        <div class="spacing-bar-wrap">
+          <div class="spacing-bar" style="width: 24px;"></div>
+          <span class="spacing-px">24px</span>
+        </div>
+        <span class="spacing-meta">섹션 간 기본</span>
+      </div>
+      <div class="spacing-row">
+        <span class="spacing-token">--space-8</span>
+        <div class="spacing-bar-wrap">
+          <div class="spacing-bar" style="width: 32px;"></div>
+          <span class="spacing-px">32px</span>
+        </div>
+        <span class="spacing-meta">카드 간 간격</span>
+      </div>
+      <div class="spacing-row">
+        <span class="spacing-token">--space-12</span>
+        <div class="spacing-bar-wrap">
+          <div class="spacing-bar" style="width: 48px;"></div>
+          <span class="spacing-px">48px</span>
+        </div>
+        <span class="spacing-meta">섹션 헤더 여백</span>
+      </div>
+      <div class="spacing-row">
+        <span class="spacing-token">--space-16</span>
+        <div class="spacing-bar-wrap">
+          <div class="spacing-bar" style="width: 64px;"></div>
+          <span class="spacing-px">64px</span>
+        </div>
+        <span class="spacing-meta">스크린 상단 패딩</span>
+      </div>
+    </div>
+
+    <!-- Mobile Grid -->
+    <div style="margin-top: 2rem; background: #17171C; border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-lg); padding: 1.5rem;">
+      <div style="font-family: var(--font-mono); font-size: 0.68rem; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Mobile Layout Grid</div>
+      <div style="display: grid; grid-template-columns: 16px 1fr 16px; gap: 0; background: rgba(0,200,150,0.04); border-radius: 6px; border: 1px solid rgba(0,200,150,0.12); overflow: hidden;">
+        <div style="background: rgba(0,200,150,0.12); height: 80px; display: flex; align-items: center; justify-content: center;">
+          <span style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--lenme-teal); writing-mode: vertical-rl; transform: rotate(180deg);">16px</span>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; padding: 1rem;">
+          <span style="font-size: 0.78rem; color: rgba(255,255,255,0.4);">Content area — 343px @ 375px screen</span>
+        </div>
+        <div style="background: rgba(0,200,150,0.12); height: 80px; display: flex; align-items: center; justify-content: center;">
+          <span style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--lenme-teal); writing-mode: vertical-rl;">16px</span>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+        <div>
+          <span style="font-family: var(--font-mono); font-size: 0.65rem; color: rgba(255,255,255,0.3); display: block; margin-bottom: 0.25rem;">모바일 (375px 기준)</span>
+          <span style="font-size: 0.8rem; color: rgba(255,255,255,0.6);">Margin: 16px · Gutter: 16px · Columns: 4</span>
+        </div>
+        <div>
+          <span style="font-family: var(--font-mono); font-size: 0.65rem; color: rgba(255,255,255,0.3); display: block; margin-bottom: 0.25rem;">카드 레이아웃</span>
+          <span style="font-size: 0.8rem; color: rgba(255,255,255,0.6);">Full width · Gap: 12px · Radius: 16px</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Radius -->
+    <div style="margin-top: 2rem;" id="radius">
+      <div style="font-family: var(--font-mono); font-size: 0.68rem; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Border Radius</div>
+      <div class="radius-grid">
+        <div class="radius-card">
+          <div class="radius-box" style="border-radius: var(--radius-sm);"></div>
+          <span class="token-label">--radius-sm</span>
+          <span class="token-value">4px</span>
+          <div style="font-size:0.65rem; color:rgba(255,255,255,0.25); margin-top:0.3rem;">배지, 태그</div>
+        </div>
+        <div class="radius-card">
+          <div class="radius-box" style="border-radius: var(--radius-md);"></div>
+          <span class="token-label">--radius-md</span>
+          <span class="token-value">8px</span>
+          <div style="font-size:0.65rem; color:rgba(255,255,255,0.25); margin-top:0.3rem;">버튼, 인풋</div>
+        </div>
+        <div class="radius-card">
+          <div class="radius-box" style="border-radius: var(--radius-lg);"></div>
+          <span class="token-label">--radius-lg</span>
+          <span class="token-value">12px</span>
+          <div style="font-size:0.65rem; color:rgba(255,255,255,0.25); margin-top:0.3rem;">소형 카드</div>
+        </div>
+        <div class="radius-card">
+          <div class="radius-box" style="border-radius: var(--radius-xl);"></div>
+          <span class="token-label">--radius-xl</span>
+          <span class="token-value">16px</span>
+          <div style="font-size:0.65rem; color:rgba(255,255,255,0.25); margin-top:0.3rem;">Loan 카드</div>
+        </div>
+        <div class="radius-card">
+          <div class="radius-box" style="border-radius: var(--radius-2xl);"></div>
+          <span class="token-label">--radius-2xl</span>
+          <span class="token-value">24px</span>
+          <div style="font-size:0.65rem; color:rgba(255,255,255,0.25); margin-top:0.3rem;">바텀 시트</div>
+        </div>
+        <div class="radius-card">
+          <div class="radius-box" style="border-radius: var(--radius-full);"></div>
+          <span class="token-label">--radius-full</span>
+          <span class="token-value">9999px</span>
+          <div style="font-size:0.65rem; color:rgba(255,255,255,0.25); margin-top:0.3rem;">아바타, 필</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+
+  <!-- ===== 4. BUTTONS ===== -->
+  <section class="section" id="buttons">
+    <div class="section-eyebrow">02 · Components</div>
+    <h2 class="section-title">Buttons</h2>
+    <p class="section-desc">5가지 variant, 4가지 size. Primary는 네이비 — 투자/확인 같은 커밋 액션. Teal CTA는 핵심 유도 액션(회원가입, 투자 시작)에만.</p>
+
+    <div class="component-label">Variants</div>
+    <div class="preview-surface">
+      <div class="flex-row">
+        <button class="btn btn-primary btn-md">Primary</button>
+        <button class="btn btn-teal btn-md">Teal CTA</button>
+        <button class="btn btn-outline btn-md">Outline</button>
+        <button class="btn btn-ghost btn-md">Ghost</button>
+        <button class="btn btn-danger btn-md">Danger</button>
+        <button class="btn btn-icon btn-md" aria-label="filter">⊟</button>
+      </div>
+    </div>
+
+    <div class="component-label">Sizes</div>
+    <div class="preview-surface">
+      <div class="flex-row" style="align-items: center;">
+        <button class="btn btn-primary btn-sm">Small</button>
+        <button class="btn btn-primary btn-md">Medium</button>
+        <button class="btn btn-primary btn-lg">Large</button>
+        <button class="btn btn-primary btn-xl">Extra Large</button>
+      </div>
+    </div>
+
+    <div class="component-label">States</div>
+    <div class="preview-surface">
+      <div class="flex-row">
+        <button class="btn btn-primary btn-md">Default</button>
+        <button class="btn btn-primary btn-md" disabled>Disabled</button>
+        <button class="btn btn-teal btn-md">Confirm offer →</button>
+        <button class="btn btn-outline btn-md">Retract</button>
+      </div>
+    </div>
+
+    <div class="code-block"><span class="c">/* Usage */</span>
+<span class="k">.btn</span> + <span class="k">.btn-{variant}</span> + <span class="k">.btn-{size}</span>
+
+<span class="c">/* Variants: primary | teal | outline | ghost | danger | icon */</span>
+<span class="c">/* Sizes:    sm | md | lg | xl                                */</span></div>
+
+    <div class="figma-card">
+      <div class="figma-card-title"><span class="figma-tag">FIGMA</span> Button 컴포넌트 구조</div>
+      <ul>
+        <li>Component: Button → Properties: variant(5), size(4), state(default/hover/pressed/disabled), hasIcon(bool)</li>
+        <li>Auto Layout 수평, padding: 좌우 토큰 기반, 고정 높이(sm:32, md:40, lg:48, xl:56)</li>
+        <li>Teal CTA는 한 스크린에 1개만 — 반드시 Rule 주석 달기</li>
+        <li>모든 버튼 min-width 적용(sm:64, md:88, lg:120, xl:160)</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+
+  <!-- ===== 5. BADGES & STATUS ===== -->
+  <section class="section" id="badges">
+    <div class="section-eyebrow">02 · Components</div>
+    <h2 class="section-title">Badges & Status</h2>
+    <p class="section-desc">Lenme에서 배지는 단순 장식이 아니라 의미를 전달해요. 색상을 임의로 바꾸지 말 것.</p>
+
+    <div class="component-label">Loan Status Badges</div>
+    <div class="preview-surface">
+      <div class="flex-row">
+        <span class="badge badge-pending">Pending</span>
+        <span class="badge badge-active">Active</span>
+        <span class="badge badge-completed">Completed</span>
+        <span class="badge badge-default">Default</span>
+      </div>
+    </div>
+
+    <div class="component-label">Risk Badges (Lenme Score 연동)</div>
+    <div class="preview-surface">
+      <div class="flex-row">
+        <span class="risk-badge risk-low">Low Risk</span>
+        <span class="risk-badge risk-med">Medium Risk</span>
+        <span class="risk-badge risk-high">High Risk</span>
+      </div>
+    </div>
+
+    <div class="component-label">Score Indicator — Lenme Score 시각화</div>
+    <div class="preview-surface">
+      <div class="flex-row" style="gap: 2rem;">
+        <div class="score-indicator">
+          <div class="score-ring low">82</div>
+          <span class="score-label low">Low Risk</span>
+        </div>
+        <div class="score-indicator">
+          <div class="score-ring med">54</div>
+          <span class="score-label med">Med Risk</span>
+        </div>
+        <div class="score-indicator">
+          <div class="score-ring high">28</div>
+          <span class="score-label high">High Risk</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="component-label">Borrower Avatar — 크레딧 컬러 코딩</div>
+    <div class="preview-surface">
+      <div class="flex-row" style="gap: 1.5rem; align-items: center;">
+        <div style="display:flex; align-items:center; gap:0.75rem;">
+          <div class="avatar avatar-green">JL</div>
+          <div>
+            <div style="font-size:0.85rem; font-weight:500; color:var(--lenme-navy);">Jane L.</div>
+            <div style="font-size:0.72rem; color:#6B7280;">Credit score 720+</div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:0.75rem;">
+          <div class="avatar avatar-yellow">MK</div>
+          <div>
+            <div style="font-size:0.85rem; font-weight:500; color:var(--lenme-navy);">Marcus K.</div>
+            <div style="font-size:0.72rem; color:#6B7280;">Credit score 580–719</div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:0.75rem;">
+          <div class="avatar avatar-red">SR</div>
+          <div>
+            <div style="font-size:0.85rem; font-weight:500; color:var(--lenme-navy);">Sara R.</div>
+            <div style="font-size:0.72rem; color:#6B7280;">Credit score under 580</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+
+  <!-- ===== 6. INPUTS ===== -->
+  <section class="section" id="inputs">
+    <div class="section-eyebrow">02 · Components</div>
+    <h2 class="section-title">Inputs & Slider</h2>
+    <p class="section-desc">금융 앱의 인풋은 정확성과 신뢰감이 핵심. Focus ring은 Teal으로 통일.</p>
+
+    <div class="component-label">Text Input</div>
+    <div class="preview-surface">
+      <div class="grid-2">
+        <div class="input-group">
+          <label class="input-label">Loan Amount</label>
+          <input class="input" type="text" placeholder="Enter amount" value="$500">
+          <div class="input-hint">Min $50 · Max $5,000</div>
+        </div>
+        <div class="input-group">
+          <label class="input-label">APR (%)</label>
+          <input class="input" type="text" placeholder="12.0">
+          <div class="input-hint">Market average: 12.0%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="component-label">Slider — Submit Offer 핵심 컴포넌트</div>
+    <div class="preview-surface">
+      <div style="max-width: 400px;">
+        <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #6B7280; margin-bottom: 0.35rem;">
+          <span>Offer Amount</span>
+          <span style="font-family: var(--font-mono); font-weight: 500; color: var(--lenme-navy);">$200</span>
+        </div>
+        <div class="slider-wrap">
+          <span style="font-family: var(--font-mono); font-size: 0.7rem; color: #9CA3AF;">$50</span>
+          <input type="range" class="lenme-slider" min="50" max="5000" value="200" id="amountSlider" oninput="document.getElementById('amountOut').textContent='$'+this.value">
+          <span style="font-family: var(--font-mono); font-size: 0.7rem; color: #9CA3AF;">$5k</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #6B7280; margin-top: 1rem; margin-bottom: 0.35rem;">
+          <span>APR</span>
+          <span style="font-family: var(--font-mono); font-weight: 500; color: var(--lenme-navy);" id="aprOut">12%</span>
+        </div>
+        <div class="slider-wrap">
+          <span style="font-family: var(--font-mono); font-size: 0.7rem; color: #9CA3AF;">5%</span>
+          <input type="range" class="lenme-slider" min="5" max="36" value="12" id="aprSlider" oninput="document.getElementById('aprOut').textContent=this.value+'%'">
+          <span style="font-family: var(--font-mono); font-size: 0.7rem; color: #9CA3AF;">36%</span>
+        </div>
+        <div style="background: var(--lenme-navy-05); border-radius: var(--radius-md); padding: 0.75rem 1rem; margin-top: 1rem; display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 0.78rem; color: #6B7280;">Est. return</span>
+          <span style="font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; color: var(--lenme-navy);">+$24</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+
+  <!-- ===== 7. CARDS ===== -->
+  <section class="section" id="cards">
+    <div class="section-eyebrow">02 · Components</div>
+    <h2 class="section-title">Cards</h2>
+    <p class="section-desc">Lenme의 핵심 UI 단위. Loan Card, Offer Card, Stat Card 세 가지가 독립 컴포넌트로 관리돼요.</p>
+
+    <div class="component-label">Loan Card — 마켓플레이스 리스트 아이템</div>
+    <div class="preview-surface">
+      <div class="grid-2">
+        <div class="loan-card">
+          <div class="loan-card-header">
+            <div class="avatar avatar-green">JL</div>
+            <div>
+              <div class="loan-card-name">Loan for rent</div>
+              <div class="loan-card-purpose">Personal · 6 months</div>
+            </div>
+            <span class="risk-badge risk-low" style="margin-left: auto;">Low</span>
+          </div>
+          <div class="loan-card-scores">
+            <div class="loan-card-score">
+              <span class="loan-card-score-val">720</span>
+              <span class="loan-card-score-label">Credit</span>
+            </div>
+            <div class="loan-card-score">
+              <span class="loan-card-score-val">82</span>
+              <span class="loan-card-score-label">Lenme</span>
+            </div>
+            <div class="loan-card-score">
+              <span class="loan-card-score-val">22%</span>
+              <span class="loan-card-score-label">DTI</span>
+            </div>
+          </div>
+          <div class="loan-card-meta">
+            <div>
+              <div class="loan-card-amount">$400</div>
+              <div class="loan-card-duration">6 months · est. +$48 return</div>
+            </div>
+            <button class="btn btn-primary btn-sm">Offer</button>
+          </div>
+        </div>
+        <div class="loan-card">
+          <div class="loan-card-header">
+            <div class="avatar avatar-yellow">MK</div>
+            <div>
+              <div class="loan-card-name">Emergency expense</div>
+              <div class="loan-card-purpose">Personal · 3 months</div>
+            </div>
+            <span class="risk-badge risk-med" style="margin-left: auto;">Med</span>
+          </div>
+          <div class="loan-card-scores">
+            <div class="loan-card-score">
+              <span class="loan-card-score-val">635</span>
+              <span class="loan-card-score-label">Credit</span>
+            </div>
+            <div class="loan-card-score">
+              <span class="loan-card-score-val">54</span>
+              <span class="loan-card-score-label">Lenme</span>
+            </div>
+            <div class="loan-card-score">
+              <span class="loan-card-score-val">38%</span>
+              <span class="loan-card-score-label">DTI</span>
+            </div>
+          </div>
+          <div class="loan-card-meta">
+            <div>
+              <div class="loan-card-amount">$250</div>
+              <div class="loan-card-duration">3 months · est. +$22 return</div>
+            </div>
+            <button class="btn btn-outline btn-sm">Offer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="component-label">Offer Card — 투자 후 상태 추적</div>
+    <div class="preview-surface">
+      <div class="grid-2">
+        <div class="offer-card">
+          <div class="offer-card-header">
+            <div>
+              <div class="offer-card-amount">$200 @ 12% APR</div>
+              <div class="offer-card-rate">Jane L. · 6 months · est. +$24</div>
+            </div>
+            <span class="badge badge-pending">Pending</span>
+          </div>
+          <div class="offer-card-status-row">
+            <span class="offer-card-seen">✓ Borrower has seen your offer</span>
+            <span class="offer-card-timestamp">4h ago</span>
+          </div>
+          <div class="offer-card-actions" style="margin-top: 0.75rem;">
+            <button class="btn btn-outline btn-sm">Edit</button>
+            <button class="btn btn-ghost btn-sm">Retract</button>
+          </div>
+        </div>
+        <div class="offer-card">
+          <div class="offer-card-header">
+            <div>
+              <div class="offer-card-amount">$500 @ 14% APR</div>
+              <div class="offer-card-rate">Marcus K. · 3 months · est. +$52</div>
+            </div>
+            <span class="badge badge-active">Active</span>
+          </div>
+          <div style="margin-top: 0.75rem;">
+            <div class="progress-header">
+              <span>Repayment progress</span>
+              <span>2 / 3 months</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" style="width: 66%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="component-label">Stat Cards — 포트폴리오 대시보드</div>
+    <div class="preview-surface">
+      <div class="grid-4">
+        <div class="stat-card">
+          <div class="stat-card-label">Total Invested</div>
+          <div class="stat-card-value">$1,420</div>
+          <span class="stat-card-delta up">↑ +$200 this month</span>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-label">Active Loans</div>
+          <div class="stat-card-value">4</div>
+          <span class="stat-card-delta up">↑ 2 new</span>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-label">Avg. Return</div>
+          <div class="stat-card-value">12.4%</div>
+          <span class="stat-card-delta up">↑ APR avg</span>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-label">Defaults</div>
+          <div class="stat-card-value">0</div>
+          <span class="stat-card-delta up">All on-time</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+
+  <!-- ===== 8. DATA DISPLAY ===== -->
+  <section class="section" id="data">
+    <div class="section-eyebrow">02 · Components</div>
+    <h2 class="section-title">Data Display</h2>
+    <p class="section-desc">Progress bar와 Repayment Schedule은 Lenme 특화 컴포넌트. 상환 상태를 시각적으로 전달해요.</p>
+
+    <div class="component-label">Progress Bar</div>
+    <div class="preview-surface" style="max-width: 480px;">
+      <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+        <div>
+          <div class="progress-header"><span>Loan repayment</span><span>80%</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width:80%;"></div></div>
+        </div>
+        <div>
+          <div class="progress-header"><span>Funding progress</span><span>55%</span></div>
+          <div class="progress-track"><div class="progress-fill warning" style="width:55%;"></div></div>
+        </div>
+        <div>
+          <div class="progress-header"><span>Overdue risk</span><span>25%</span></div>
+          <div class="progress-track"><div class="progress-fill danger" style="width:25%;"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="component-label">Repayment Schedule</div>
+    <div class="preview-surface" style="max-width: 480px;">
+      <div style="background:#fff; border-radius: var(--radius-xl); padding: 1.25rem 1.5rem; box-shadow: var(--shadow-sm);">
+        <div style="font-size:0.8rem; font-weight:500; color:var(--lenme-navy); margin-bottom:0.25rem;">Loan #4821 · $400 @ 12% APR</div>
+        <div style="font-size:0.72rem; color:#6B7280; margin-bottom:1rem;">Jane L. · 6 months</div>
+        <div class="repay-row">
+          <span class="repay-month">Month 1</span>
+          <span class="repay-amount">$70.67</span>
+          <span class="badge badge-completed">Paid</span>
+        </div>
+        <div class="repay-row">
+          <span class="repay-month">Month 2</span>
+          <span class="repay-amount">$70.67</span>
+          <span class="badge badge-completed">Paid</span>
+        </div>
+        <div class="repay-row">
+          <span class="repay-month">Month 3</span>
+          <span class="repay-amount">$70.67</span>
+          <span class="badge badge-active">Due Apr 1</span>
+        </div>
+        <div class="repay-row">
+          <span class="repay-month">Month 4</span>
+          <span class="repay-amount">$70.67</span>
+          <span class="badge badge-pending">Upcoming</span>
+        </div>
+        <div class="repay-row">
+          <span class="repay-month">Month 5</span>
+          <span class="repay-amount">$70.67</span>
+          <span class="badge badge-pending">Upcoming</span>
+        </div>
+        <div class="repay-row">
+          <span class="repay-month">Month 6</span>
+          <span class="repay-amount">$70.67</span>
+          <span class="badge badge-pending">Upcoming</span>
+        </div>
+        <div style="border-top: 2px solid var(--lenme-navy-10); margin-top: 0.75rem; padding-top: 0.75rem; display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size:0.8rem; font-weight:500; color:var(--lenme-navy);">Total return</span>
+          <span style="font-family: var(--font-display); font-size:1.1rem; font-weight:700; color: var(--risk-low-text);">+$24.02</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+
+  <!-- ===== FIGMA GUIDE ===== -->
+  <section class="section" id="figma">
+    <div class="section-eyebrow">03 · Reference</div>
+    <h2 class="section-title">Figma 구성 가이드</h2>
+    <p class="section-desc">이 HTML 파일을 Figma로 옮길 때의 권장 파일 구조와 순서.</p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+      <div class="figma-card" style="margin-top: 0;">
+        <div class="figma-card-title"><span class="figma-tag">PAGE 1</span> 🎨 Foundations</div>
+        <ul>
+          <li>Color Styles (brand + semantic)</li>
+          <li>Text Styles (display / body / mono)</li>
+          <li>Local Variables: spacing, radius, shadow</li>
+          <li>Grid 설정 (4 col, 16px margin, 16px gutter)</li>
+        </ul>
+      </div>
+      <div class="figma-card" style="margin-top: 0;">
+        <div class="figma-card-title"><span class="figma-tag">PAGE 2</span> 🧩 Components</div>
+        <ul>
+          <li>Button (variant × size matrix)</li>
+          <li>Badge / Risk Badge / Score Indicator</li>
+          <li>Avatar (3 color states)</li>
+          <li>Input / Slider</li>
+          <li>Loan Card / Offer Card / Stat Card</li>
+          <li>Progress Bar / Repayment Row</li>
+        </ul>
+      </div>
+      <div class="figma-card" style="margin-top: 0;">
+        <div class="figma-card-title"><span class="figma-tag">PAGE 3</span> 📱 Screens</div>
+        <ul>
+          <li>Loan Marketplace</li>
+          <li>Borrower Profile</li>
+          <li>Submit Offer (Modal)</li>
+          <li>My Offers / Portfolio Dashboard</li>
+        </ul>
+      </div>
+      <div class="figma-card" style="margin-top: 0;">
+        <div class="figma-card-title"><span class="figma-tag">PAGE 4</span> 📖 Documentation</div>
+        <ul>
+          <li>Usage do/don't for semantic colors</li>
+          <li>Typography 사용 규칙</li>
+          <li>Risk color 사용 규칙 (임의 변경 금지)</li>
+          <li>컴포넌트별 accessibility note</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="figma-card">
+      <div class="figma-card-title"><span class="figma-tag">NAMING</span> 컴포넌트 네이밍 규칙</div>
+      <div class="code-block"><span class="c">/* 컴포넌트 네이밍 */</span>
+<span class="k">Button/Primary/Large/Default</span>
+<span class="k">Badge/Status/Active</span>
+<span class="k">Badge/Risk/Low</span>
+<span class="k">Card/Loan/Default</span>
+<span class="k">Card/Offer/Pending</span>
+<span class="k">Card/Stat/Default</span>
+<span class="k">Input/Text/Default</span>
+<span class="k">Input/Slider/Amount</span>
+<span class="k">Avatar/Green</span>  <span class="c">/* credit 720+ */</span>
+<span class="k">Avatar/Yellow</span> <span class="c">/* credit 580-719 */</span>
+<span class="k">Avatar/Red</span>    <span class="c">/* credit under 580 */</span></div>
+    </div>
+  </section>
+
+
+  <!-- ===== TOKEN REFERENCE ===== -->
+  <section class="section" id="tokens">
+    <div class="section-eyebrow">03 · Reference</div>
+    <h2 class="section-title">전체 토큰 레퍼런스</h2>
+
+    <div class="code-block">
+<span class="c">/* =========================================
+   LENME DESIGN TOKENS — CSS Variables
+   Copy this into your global stylesheet
+   ========================================= */</span>
+
+:root {
+
+  <span class="c">/* BRAND */</span>
+  <span class="k">--lenme-navy:</span>       <span class="v">#0B1F3A</span>;
+  <span class="k">--lenme-navy-80:</span>    <span class="v">#223350</span>;
+  <span class="k">--lenme-navy-60:</span>    <span class="v">#3A4F6B</span>;
+  <span class="k">--lenme-navy-20:</span>    <span class="v">#C8D2DE</span>;
+  <span class="k">--lenme-navy-10:</span>    <span class="v">#E9EDF2</span>;
+  <span class="k">--lenme-navy-05:</span>    <span class="v">#F4F6F9</span>;
+  <span class="k">--lenme-teal:</span>       <span class="v">#00C896</span>;
+  <span class="k">--lenme-teal-80:</span>    <span class="v">#33D3AB</span>;
+  <span class="k">--lenme-teal-40:</span>    <span class="v">#99E9D5</span>;
+  <span class="k">--lenme-teal-15:</span>    <span class="v">#D6F7EF</span>;
+  <span class="k">--lenme-teal-08:</span>    <span class="v">#EDFCF8</span>;
+
+  <span class="c">/* SEMANTIC — RISK */</span>
+  <span class="k">--risk-low:</span>         <span class="v">#00C896</span>;
+  <span class="k">--risk-low-bg:</span>      <span class="v">#EDFCF8</span>;
+  <span class="k">--risk-low-text:</span>    <span class="v">#006B50</span>;
+  <span class="k">--risk-med:</span>         <span class="v">#F5A623</span>;
+  <span class="k">--risk-med-bg:</span>      <span class="v">#FEF6E7</span>;
+  <span class="k">--risk-med-text:</span>    <span class="v">#7A4E00</span>;
+  <span class="k">--risk-high:</span>        <span class="v">#E5383B</span>;
+  <span class="k">--risk-high-bg:</span>     <span class="v">#FDECEA</span>;
+  <span class="k">--risk-high-text:</span>   <span class="v">#8B0000</span>;
+
+  <span class="c">/* SEMANTIC — STATUS */</span>
+  <span class="k">--status-pending:</span>   <span class="v">#6C8EBF</span>;
+  <span class="k">--status-active:</span>    <span class="v">#00C896</span>;
+  <span class="k">--status-completed:</span> <span class="v">#6B7280</span>;
+  <span class="k">--status-default:</span>   <span class="v">#E5383B</span>;
+
+  <span class="c">/* TYPOGRAPHY */</span>
+  <span class="k">--font-display:</span> <span class="v">'Syne', sans-serif</span>;
+  <span class="k">--font-body:</span>    <span class="v">'IBM Plex Sans', sans-serif</span>;
+  <span class="k">--font-mono:</span>    <span class="v">'IBM Plex Mono', monospace</span>;
+
+  <span class="c">/* SPACING */</span>
+  <span class="k">--space-1:</span>  <span class="v">0.25rem</span>;  <span class="c">/* 4px  */</span>
+  <span class="k">--space-2:</span>  <span class="v">0.5rem</span>;   <span class="c">/* 8px  */</span>
+  <span class="k">--space-3:</span>  <span class="v">0.75rem</span>;  <span class="c">/* 12px */</span>
+  <span class="k">--space-4:</span>  <span class="v">1rem</span>;     <span class="c">/* 16px */</span>
+  <span class="k">--space-5:</span>  <span class="v">1.25rem</span>;  <span class="c">/* 20px */</span>
+  <span class="k">--space-6:</span>  <span class="v">1.5rem</span>;   <span class="c">/* 24px */</span>
+  <span class="k">--space-8:</span>  <span class="v">2rem</span>;     <span class="c">/* 32px */</span>
+  <span class="k">--space-10:</span> <span class="v">2.5rem</span>;   <span class="c">/* 40px */</span>
+  <span class="k">--space-12:</span> <span class="v">3rem</span>;     <span class="c">/* 48px */</span>
+  <span class="k">--space-16:</span> <span class="v">4rem</span>;     <span class="c">/* 64px */</span>
+
+  <span class="c">/* RADIUS */</span>
+  <span class="k">--radius-sm:</span>   <span class="v">4px</span>;
+  <span class="k">--radius-md:</span>   <span class="v">8px</span>;
+  <span class="k">--radius-lg:</span>   <span class="v">12px</span>;
+  <span class="k">--radius-xl:</span>   <span class="v">16px</span>;
+  <span class="k">--radius-2xl:</span>  <span class="v">24px</span>;
+  <span class="k">--radius-full:</span> <span class="v">9999px</span>;
+
+  <span class="c">/* ELEVATION */</span>
+  <span class="k">--shadow-sm:</span>  <span class="v">0 1px 3px rgba(11,31,58,0.08)</span>;
+  <span class="k">--shadow-md:</span>  <span class="v">0 4px 12px rgba(11,31,58,0.10)</span>;
+  <span class="k">--shadow-lg:</span>  <span class="v">0 8px 24px rgba(11,31,58,0.12)</span>;
+}
+    </div>
+  </section>
+
+</main>
+</div>
+
+<script>
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(l => {
+      l.classList.remove('active');
+      if (l.getAttribute('href') === '#' + current) l.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
